@@ -1,0 +1,3 @@
+<jboss-web>
+	<context-root>/hosmerlake</context-root>
+</jboss-web>

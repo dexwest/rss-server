@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	<!-- Scheme setup -->
+	<bean id="basic-scheme" class="org.apache.http.conn.scheme.Scheme">
+		<description>Basic scheme for http requests</description>
+		<constructor-arg index="0" value="http" />
+		<constructor-arg index="1">
+			<bean id="plainSocketFactory" class="org.apache.http.conn.scheme.PlainSocketFactory"
+				factory-method="getSocketFactory" />
+		</constructor-arg>
+		<constructor-arg index="2" value="80" />
+	</bean>
+	<bean id="secure-scheme" class="org.apache.http.conn.scheme.Scheme">
+		<description>
+			Secure scheme for https requests using SSL.
+			We are using
+			the default hostname verifier which is
+			BROWSER_COMPATIBLE_HOSTNAME_VERIFIER.
+			This allows wildcard CN's to be
+			valid for any level subdomain.
+			If it's set to STRICT, it will only
+			allow one subdomain level.
+		</description>
+		<constructor-arg index="0" value="https" />
+		<constructor-arg index="1">
+			<bean id="secureSocketFactory" class="org.apache.http.conn.ssl.SSLSocketFactory">
+				<constructor-arg>
+					<bean id="sslContext" class="javax.net.ssl.SSLContext"
+						factory-method="getDefault" />
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg index="2" value="443" />
+	</bean>
+
+	<bean name="default-scheme-registry" class="org.apache.http.conn.scheme.SchemeRegistry"
+		scope="singleton">
+		<property name="items">
+			<map>
+				<entry key="http" value-ref="basic-scheme" />
+				<entry key="https" value-ref="secure-scheme" />
+			</map>
+		</property>
+	</bean>
+	<bean name="defaultConnectionManager"
+		class="org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager"
+		scope="singleton" depends-on="default-scheme-registry">
+		<description>
+			Default connection manager for app.
+			As of 4.1, use of an
+			HttpParam bean is deprecated. Instead pooling
+			properties for the
+			Connection Manager are set here.
+		</description>
+
+		<constructor-arg index="0" ref="default-scheme-registry" />
+		<constructor-arg index="1" value="10000">
+			<description>Connection pooling timeout.</description>
+		</constructor-arg>
+		<constructor-arg index="2">
+			<description>Indicates what unit of time argument 1 uses.
+			</description>
+			<bean id="java.util.concurrent.TimeUnit.MILLISECONDS"
+				class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean" />
+		</constructor-arg>
+
+		<property name="defaultMaxPerRoute" value="100" />
+		<property name="maxTotal" value="400" />
+	</bean>
+
+	<bean name="default-http-request-retry-handler"
+		class="org.apache.http.impl.client.DefaultHttpRequestRetryHandler">
+		<!-- retry count -->
+		<constructor-arg index="0" value="1" />
+		<!-- enable retry -->
+		<constructor-arg index="1" value="true" />
+	</bean>
+	<bean name="default-connection-params" class="org.apache.http.params.BasicHttpParams" />
+
+	<bean name="default-http-client" class="org.apache.http.impl.client.ContentEncodingHttpClient"
+		scope="singleton">
+		<constructor-arg index="0"
+			type="org.apache.http.conn.ClientConnectionManager" ref="defaultConnectionManager" />
+		<constructor-arg index="1"
+			type="org.apache.http.params.HttpParams" ref="default-connection-params" />
+		<property name="httpRequestRetryHandler" ref="default-http-request-retry-handler" />
+	</bean>
+</beans>
