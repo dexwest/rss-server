@@ -1,0 +1,166 @@
+<?xml-stylesheet href="http://sports.espn.go.com/rss/friendlyRSSDemo.xsl" type="text/xsl" media="screen"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:admin="http://webns.net/mvcb/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:atom="http://purl.org/atom/ns#"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/">
+	<channel>
+		<title>ESPN.com</title>
+		<link>http://espn.go.com/</link>
+		<description>Latest news from ESPN.com</description>
+		<language>en-us</language>
+		<atom:link rel="self"
+			href="http://sports.espn.go.com/espn/rss/news?null" />
+		<lastBuildDate>Tue, 17 Sep 2013 12:38:46 PDT</lastBuildDate>
+		<docs>http://backend.userland.com/rss</docs>
+		<managingEditor>webmaster@espn.go.com</managingEditor>
+		<image>
+			<url>http://a.espncdn.com/i/tvlistings/tv_espn_original.gif</url>
+			<title>ESPN logo</title>
+			<link>http://espn.go.com</link>
+			<width>84</width>
+			<height>34</height>
+		</image>
+		<ttl>30</ttl>
+		<dc:rights>Copyright 2013</dc:rights>
+		<admin:generatorAgent rdf:resource="http://espn.go.com/rss/?v=0.9beta" />
+		<admin:errorReportsTo rdf:resource="mailto:customer.service@espn.go.com" />
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+		<sy:updateBase>2000-01-01T12:00+00:00</sy:updateBase>
+		<item>
+			<dc:creator><![CDATA[Associated Press]]></dc:creator>
+			<title><![CDATA[Bernard's 2 TDs lead Bengals past Steelers]]></title>
+			<description><![CDATA[Rookie Bernard leads Bengals over Steelers 20-10]]></description>
+			<pubDate>Tue, 17 Sep 2013 06:43:26 PDT</pubDate>
+			<guid isPermaLink="false">http://scores.espn.go.com/nfl/recap?gameId=330916004</guid>
+			<link>http://scores.espn.go.com/nfl/recap?gameId=330916004</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[ESPN.com news services]]></dc:creator>
+			<title><![CDATA[Charles: Chiefs want to win in Philly for Reid]]></title>
+			<description><![CDATA[Jamaal Charles wants to make sure that Andy Reid's return to Philadelphia is a triumphant one.]]></description>
+			<pubDate>Tue, 17 Sep 2013 09:00:31 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9684001</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9684001/jamaal-charles-says-kansas-city-chiefs-back-andy-reid-want-win-philadelphia-eagles</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Mitch Sherman]]></dc:creator>
+			<title><![CDATA[Pelini believes Husker fans will forgive rant]]></title>
+			<description><![CDATA[Nebraska coach Bo Pelini said Tuesday he believes fans will forgive him for the 2011 comments leaked this week in which he criticized them in an expletive-laced rant.]]></description>
+			<pubDate>Tue, 17 Sep 2013 11:23:30 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/college-football/story/_/id/9684660</guid>
+			<link>http://espn.go.com/college-football/story/_/id/9684660/nebraska-cornhuskers-coach-bo-pelini-believes-fans-forgive-emotional-rant</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Pat Yasinskas]]></dc:creator>
+			<title><![CDATA[Reports: Revis unhappy with Bucs' Schiano]]></title>
+			<description><![CDATA[Darrelle Revis is unhappy with coach Greg Schiano's disciplined style and his defensive scheme, according to numerous reports.]]></description>
+			<pubDate>Tue, 17 Sep 2013 11:55:59 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9684713</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9684713/darrelle-revis-tampa-bay-buccaneers-unhappy-coach-greg-schiano-according-reports</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Pat Yasinskas]]></dc:creator>
+			<title><![CDATA[Top Falcons LB to IR; RB Jackson out 2-4?]]></title>
+			<description><![CDATA[The Atlanta Falcons on Tuesday placed linebacker Sean Weatherspoon on injured reserve, but designated him to return.]]></description>
+			<pubDate>Tue, 17 Sep 2013 11:45:26 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9684710</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9684710/sean-weatherspoon-atlanta-falcons-put-short-term-ir</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Ed Werder]]></dc:creator>
+			<title><![CDATA[Source: 50-50 chance Gronk back Sunday]]></title>
+			<description><![CDATA[Rob Gronkowski has been practicing for several weeks, and a source said there is a 50-50 chance that he makes his return to the lineup this week in Tampa against the Buccaneers.]]></description>
+			<pubDate>Tue, 17 Sep 2013 11:26:09 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/boston/nfl/story/_/id/9684019</guid>
+			<link>http://espn.go.com/boston/nfl/story/_/id/9684019/50-50-chance-rob-gronkowski-new-england-patriots-back-sunday</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Paul Kuharsky]]></dc:creator>
+			<title><![CDATA[Britt tweets he likely won't return to Titans]]></title>
+			<description><![CDATA[After irking his coaches with a costly penalty and earning some time on the bench, Tennessee Titans wide receiver Kenny Britt took to Twitter on Tuesday to indicate that he thinks this will be his last season with the team.]]></description>
+			<pubDate>Tue, 17 Sep 2013 11:29:41 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9684072</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9684072/kenny-britt-tennessee-titans-tweets-expect-return-team-next-season</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Todd Wills]]></dc:creator>
+			<title><![CDATA[Washington fears for job as Rangers slump]]></title>
+			<description><![CDATA[Texas Rangers manager Ron Washington said Tuesday that he fears for his job as his club trudges its way through a second straight September swoon.]]></description>
+			<pubDate>Tue, 17 Sep 2013 12:13:19 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/dallas/mlb/story/_/id/9685027</guid>
+			<link>http://espn.go.com/dallas/mlb/story/_/id/9685027/ron-washington-fears-job-texas-rangers-slump</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[ESPN.com news services]]></dc:creator>
+			<title><![CDATA[Mayweather sorry for barb at De La Hoya]]></title>
+			<description><![CDATA[Floyd Mayweather Jr. issued an apology Monday for a social media post that appeared to ridicule Oscar De La Hoya for having checked into a substance abuse treatment facility.]]></description>
+			<pubDate>Tue, 17 Sep 2013 06:49:21 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/boxing/story/_/id/9683650</guid>
+			<link>http://espn.go.com/boxing/story/_/id/9683650/floyd-mayweather-jr-apologizes-social-media-post-ridiculing-oscar-de-la-hoya</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Associated Press]]></dc:creator>
+			<title><![CDATA[Court denies N.J. appeal for sports betting law]]></title>
+			<description><![CDATA[A federal appeals court dealt another blow to New Jersey's efforts to legalize sports gambling Tuesday, upholding a ruling that the state's betting law conflicts with federal law and shouldn't be implemented.]]></description>
+			<pubDate>Tue, 17 Sep 2013 11:43:16 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/espn/story/_/id/9684141</guid>
+			<link>http://espn.go.com/espn/story/_/id/9684141/federal-court-denies-new-jersey-appeal-sports-betting-case</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[ESPN.com news services]]></dc:creator>
+			<title><![CDATA[Pac-12 reprimands refs from ASU-Wisconsin]]></title>
+			<description><![CDATA[The Pac-12 on Monday reprimanded officials who worked Saturday's game between Arizona State and Wisconsin for their handling of the bizarre end of the game.]]></description>
+			<pubDate>Tue, 17 Sep 2013 09:24:44 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/college-football/story/_/id/9681505</guid>
+			<link>http://espn.go.com/college-football/story/_/id/9681505/pac-12-conference-reprimands-officials-arizona-state-wisconsin-game</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Adam Schefter]]></dc:creator>
+			<title><![CDATA[Bucs' Goldson docked 1 game for helmet hit]]></title>
+			<description><![CDATA[Tampa Bay Buccaneers safety Dashon Goldson has been suspended one game for a helmet-to-helmet hit on New Orleans Saints running back Darren Sproles.]]></description>
+			<pubDate>Tue, 17 Sep 2013 07:31:38 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9682374</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9682374/dashon-goldson-tampa-bay-buccaneers-suspended-one-game</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[ESPN.com news services]]></dc:creator>
+			<title><![CDATA[Sources: Fine, but no ban, for Meriweather]]></title>
+			<description><![CDATA[Washington Redskins safety Brandon Meriweather will be fined, but not suspended, for his helmet-to-helmet hit Sunday that knocked Green Bay Packers running back Eddie Lacy out of the game with a concussion, sources told ESPN.]]></description>
+			<pubDate>Tue, 17 Sep 2013 12:04:06 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9683848</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9683848/fine-no-ban-brandon-meriweather-washington-redskins</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[Associated Press]]></dc:creator>
+			<title><![CDATA[Bernard's 2 TDs lead Bengals past Steelers]]></title>
+			<description><![CDATA[Rookie Bernard leads Bengals over Steelers 20-10]]></description>
+			<pubDate>Tue, 17 Sep 2013 06:43:26 PDT</pubDate>
+			<guid isPermaLink="false">http://scores.espn.go.com/nfl/recap?gameId=330916004</guid>
+			<link>http://scores.espn.go.com/nfl/recap?gameId=330916004</link>
+		</item>
+
+		<item>
+			<dc:creator><![CDATA[ESPN.com news services]]></dc:creator>
+			<title><![CDATA[Sherman takes jab at Harbaugh after win]]></title>
+			<description><![CDATA[Richard Sherman called out his former college coach after the Seattle Seahawks' 29-3 victory over the San Francisco 49ers, saying San Francisco coach Jim Harbaugh didn't acknowledge him after the game.]]></description>
+			<pubDate>Mon, 16 Sep 2013 14:13:10 PDT</pubDate>
+			<guid isPermaLink="false">http://espn.go.com/nfl/story/_/id/9680451</guid>
+			<link>http://espn.go.com/nfl/story/_/id/9680451/richard-sherman-seattle-seahawks-jabs-jim-harbaugh-san-francisco-49ers-win</link>
+		</item>
+
+	</channel>
+</rss>

@@ -145,6 +145,13 @@
 			<scope>compile</scope>
 			<version>4.2.5</version>
 		</dependency>
+
+		<!-- RSS feed parser <version>full</version> -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-feedparser</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -156,6 +163,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

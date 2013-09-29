@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.hosmerlake.rss.common.interceptor.MetricLoggerInterceptor;
 
 @Configuration
-@PropertySource({"classpath:/crawler.properties"} )
+@PropertySource({"classpath:/crawler.properties","classpath:/env-config.properties"} )
 @ComponentScan( basePackages = {"com.hosmerlake.rss.crawler","com.hosmerlake.rss.common"} )
 @ImportResource( { "classpath*:/application-context.xml","classpath*:/http-client-context.xml" } )
 public class CrawlerConfiguration extends WebMvcConfigurerAdapter implements EnvironmentAware  {

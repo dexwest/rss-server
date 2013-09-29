@@ -59,7 +59,7 @@ public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 
 		// Don't execute request if it's invalid, canceled, or already executed
 		if (validateInput()) {
-			result = httpClient.doRequest(this, parser);
+			result = getHttpClient().doRequest(this, parser);
 			logResponseToConsole(result);
 		}
 		return result;
@@ -73,7 +73,7 @@ public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 	 */
 	public boolean validateInput() {
 
-		if (httpClient == null) {
+		if (getHttpClient() == null) {
 			logger.error("httpClient must be set to execute request");
 			return false;
 		}
@@ -114,6 +114,14 @@ public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 
 	public void setResult(Object result) {
 		this.result = result;
+	}
+
+	public HttpClientRequest getHttpClient() {
+		return httpClient;
+	}
+
+	public void setHttpClient(HttpClientRequest httpClient) {
+		this.httpClient = httpClient;
 	}
 
 }

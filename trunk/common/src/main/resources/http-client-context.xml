@@ -81,7 +81,7 @@
 	</bean>
 	<bean name="default-connection-params" class="org.apache.http.params.BasicHttpParams" />
 
-	<bean name="default-http-client" class="org.apache.http.impl.client.ContentEncodingHttpClient"
+	<bean name="default-http-client" class="org.apache.http.impl.client.DefaultHttpClient"
 		scope="singleton">
 		<constructor-arg index="0"
 			type="org.apache.http.conn.ClientConnectionManager" ref="defaultConnectionManager" />

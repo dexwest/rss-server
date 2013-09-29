@@ -73,7 +73,7 @@ public class HttpClientResponseHandler implements ResponseHandler<Object> {
 	          responseStream = response.getEntity().getContent();
 	          
 	          // TODO: Should we pass the encoding found in the response header?
-	          returnValue = this.getParser().parse(responseStream, this.getDefaultResponseEncoding());
+	          returnValue = this.getParser().parse(responseStream, response.getHeaders("content-type"), contentRequest.getService().getUrl());
 	        }
 	        catch(Exception e)
 	        {

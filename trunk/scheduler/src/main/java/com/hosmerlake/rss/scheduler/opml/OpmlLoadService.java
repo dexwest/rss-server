@@ -41,11 +41,11 @@ public class OpmlLoadService implements LoadObject, SaveObject {
 	}
 	@Override
 	public Object loadObj(String objUid) throws ModelException, ParseException {
-		return getParser().parse(objStore.loadObj(parser.getObjectName(objUid)), null);
+		return getParser().parse(objStore.loadObj(objStore.getObjectFileName(objUid, DefaultObjectStore.OBJ_TYPE.JSON)), null, null);
 	}
 	@Override
 	public void saveObj(ByteArrayInputStream obj, String objUid) throws ModelException {
-		objStore.saveObj(obj, parser.getObjectName(objUid));
+		objStore.saveObj(obj, objStore.getObjectFileName(objUid, DefaultObjectStore.OBJ_TYPE.JSON));
 	}
 
 	public DefaultJsonContentParser getParser() {

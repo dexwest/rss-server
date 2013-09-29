@@ -9,8 +9,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import com.hosmerlake.rss.common.exception.ContentRequestException;
@@ -22,7 +20,6 @@ import com.hosmerlake.rss.crawler.controller.content.CrawlRssContentParameters;
  *
  */
 @Component("crawl-rss-service")
-@Scope(proxyMode = ScopedProxyMode.DEFAULT, value = "request")
 public class CrawlRSSService extends RemoteService {
 	private static final Log logger = LogFactory.getLog(CrawlRSSService.class);
 
