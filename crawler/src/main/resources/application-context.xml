@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd 
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:/env-config.properties</value>
+		</property>
+	</bean>
+	<bean name="crawler-http-client-config" class="com.hosmerlake.rss.common.request.HttpClientConfig">
+		<property name="proxyEnabled" value="${http.client.config.proxyEnabled}" />
+		<property name="proxyHost" value="${http.client.config.proxyHost}" />
+		<property name="proxyPort" value="${http.client.config.proxyPort}" />
+		<property name="hostsToExcludeFromProxy">
+			<list>
+				<value>ecn[0-9]{1,}-.*\.nike\.com</value>
+				<value>ecn[0-9]{1,}-.*\.nikedev\.com</value>
+				<value>.*-search\.nike\.com</value>
+				<value>.*local.*\.nike\.com</value>
+				<value>.*nikedev\.com</value>
+				<value>npatilw2</value>
+				<value>aws-224-65\.nike\.com</value>
+				<value>vm0253ussac1\.cust\.aops-eds\.com</value>
+				<value>10.7.19.142</value>
+				<value>10.7.19.202</value>
+				<value>10.7.19.220</value>
+			</list>
+		</property>
+		<property name="credentialsEnabled" value="${http.client.config.credentialsEnabled}" />
+		<property name="credentialsMap" ref="http-credentials" />
+	</bean>
+	<!-- Auth setup -->
+	<util:map id="http-credentials" map-class="java.util.HashMap">
+		<entry>
+			<key>
+				<bean class="org.apache.http.auth.AuthScope">
+					<constructor-arg index="0">
+						<null />
+					</constructor-arg>
+					<constructor-arg index="1" value="-1" />
+					<constructor-arg index="2">
+						<null />
+					</constructor-arg>
+					<constructor-arg index="3" value="basic" />
+				</bean>
+			</key>
+			<bean class="org.apache.http.auth.UsernamePasswordCredentials">
+				<constructor-arg value="rga" />
+				<constructor-arg value="scaracom9" />
+			</bean>
+		</entry>
+	</util:map>
 
 </beans>

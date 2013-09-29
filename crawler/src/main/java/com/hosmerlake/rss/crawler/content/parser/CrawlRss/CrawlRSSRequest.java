@@ -3,17 +3,15 @@
  */
 package com.hosmerlake.rss.crawler.content.parser.CrawlRss;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.context.annotation.ScopedProxyMode;
 
 import com.hosmerlake.rss.common.content.DefaultContentRequest;
 import com.hosmerlake.rss.common.exception.ContentRequestException;
+import com.hosmerlake.rss.common.request.HttpClientConfig;
 import com.hosmerlake.rss.common.service.RemoteService;
-import com.hosmerlake.rss.crawler.controller.content.CrawlRssContentParameters;
 import com.hosmerlake.rss.crawler.model.RssContent.RssContentRoot;
 
 /**
@@ -21,15 +19,20 @@ import com.hosmerlake.rss.crawler.model.RssContent.RssContentRoot;
  *
  */
 @Component("rss-request")
-@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value="request")
 public class CrawlRSSRequest extends DefaultContentRequest<RssContentRoot> {
 
-	@Autowired
+	@Resource(name="rss-request-parser")
+	private
 	CrawlRSSRequestParser parser;
+	
+	@PostConstruct
+	public void init() throws ContentRequestException {
+		getParser().setContentUrl(getService().getUrl());
+	}
 	
 	@Override
 	public RssContentRoot processRequest() throws ContentRequestException {
-		super.executeRequest(parser);
+		super.executeRequest(getParser());
 		return (RssContentRoot) getResult();
 	}
 	
@@ -37,5 +40,18 @@ public class CrawlRSSRequest extends DefaultContentRequest<RssContentRoot> {
 	public void setService(RemoteService service)
 	{
 		super.setService(service);
+	}
+	
+	@Resource(name="crawler-http-client-config")
+	public void setHttpConfig(HttpClientConfig config) {
+		super.getHttpClient().setConfig(config);
+	}
+
+	public CrawlRSSRequestParser getParser() {
+		return parser;
+	}
+
+	public void setParser(CrawlRSSRequestParser parser) {
+		this.parser = parser;
 	}
 }

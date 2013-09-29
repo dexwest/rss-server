@@ -6,12 +6,8 @@ package com.hosmerlake.rss.crawler.controller.content;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import com.hosmerlake.rss.common.controller.DefaultParameters;
@@ -21,14 +17,9 @@ import com.hosmerlake.rss.common.controller.DefaultParameters;
  *
  */
 @Component("crawl-rss-content-parameters")
-@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS, value = "request")
 public class CrawlRssContentParameters extends DefaultParameters {
 	
-	@Resource
-	protected HttpServletRequest request;
-
-	@PostConstruct
-	public void init() {
+	public void init(HttpServletRequest request) {
 		this.constructParams(request);
 	}
 	

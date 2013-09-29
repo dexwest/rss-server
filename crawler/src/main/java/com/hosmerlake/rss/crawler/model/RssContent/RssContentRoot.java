@@ -15,10 +15,17 @@ import org.springframework.stereotype.Component;
 public class RssContentRoot implements Serializable {
 	private static final long serialVersionUID = 741104813016798099L;
 
+	private boolean parsed;
 	/**
 	 * 
 	 */
 	public RssContentRoot() {
 		// TODO Auto-generated constructor stub
+	}
+	public boolean isParsed() {
+		return parsed;
+	}
+	public void setParsed(boolean parsed) {
+		this.parsed = parsed;
 	}
 }

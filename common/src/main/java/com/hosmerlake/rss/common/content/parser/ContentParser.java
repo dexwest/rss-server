@@ -5,6 +5,8 @@ package com.hosmerlake.rss.common.content.parser;
 
 import java.io.InputStream;
 
+import org.apache.http.Header;
+
 import com.hosmerlake.rss.common.content.ParseException;
 
 /**
@@ -12,5 +14,5 @@ import com.hosmerlake.rss.common.content.ParseException;
  *
  */
 public interface ContentParser {
-	Object parse(InputStream responseStream, String contentType) throws ParseException; 
+	Object parse(InputStream responseStream, Header[] headers, String url) throws ParseException; 
 }

@@ -5,25 +5,38 @@ package com.hosmerlake.rss.common.content.parser.xml;
 
 import java.io.InputStream;
 
-import org.springframework.stereotype.Component;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.http.Header;
 
 import com.hosmerlake.rss.common.content.ParseException;
 import com.hosmerlake.rss.common.content.parser.ContentParser;
 
 /**
  * @author bfox1
- *
+ * 
  */
-@Component("default-xml-content-parser")
-public class DefaultXMLContentParser implements ContentParser {
+public abstract class DefaultXMLContentParser implements ContentParser {
+	private static final Log logger = LogFactory.getLog(DefaultXMLContentParser.class);
 
-	/* (non-Javadoc)
-	 * @see com.hosmerlake.rss.common.content.parser.ContentParser#parse(java.io.InputStream, java.lang.String)
+	protected abstract Object parserInternal(InputStream is, Header[] headers, String url);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.hosmerlake.rss.common.content.parser.ContentParser#parse(java.io.
+	 * InputStream, java.lang.String)
 	 */
 	@Override
-	public Object parse(InputStream responseStream, String defaultResponseEncoding) throws ParseException {
-		// TODO Auto-generated method stub
-		return null;
+	public Object parse(InputStream is, Header[] headers, String url) throws ParseException {
+		Object dom;
+		try {
+			dom = parserInternal(is, headers, url);
+		} catch (Exception e) {
+			logger.warn("General exception occured while creating reader", e);
+			throw new ParseException("failed to create XML stream reader", e);
+		} finally {
+		}
+		return dom;
 	}
-
 }

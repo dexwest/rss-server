@@ -17,6 +17,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.hosmerlake.rss.scheduler.model.DefaultObjectStore.OBJ_TYPE;
+
 /**
  * @author BFOX1
  *
@@ -24,7 +26,8 @@ import org.springframework.stereotype.Component;
 @Component("default-object-store")
 public class DefaultObjectStore implements LoadObject, SaveObject {
 
-
+	public static enum OBJ_TYPE {JSON, XML};
+	
 	@Value("${object.store.load-Path}")
 	private String objStorePath;
 		
@@ -62,5 +65,15 @@ public class DefaultObjectStore implements LoadObject, SaveObject {
 		
 		File obj = FileUtils.getFile(objStorePath, objUid);
 		return obj;
+	}
+	public String getObjectFileName(String name, OBJ_TYPE type) {
+		switch (type) {
+			case JSON:
+				return name + ".json";
+			case XML:
+				return name + ".xml";
+			default:
+				return name;
+		}
 	}
 }

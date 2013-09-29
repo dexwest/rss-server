@@ -1,6 +1,5 @@
 package com.hosmerlake.rss.crawler.controller;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,12 +46,9 @@ public class RssController {
 	 */
     @ResponseBody
     @RequestMapping(value = "/content", method = RequestMethod.GET)
-    public ResponseEntity<CrawlResponse> get(HttpServletRequest request, HttpServletResponse response,
-    		@Valid CrawlRssContentParameters params, Errors errors) throws Exception {
+    public ResponseEntity<CrawlResponse> get(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
-    	CopyUtil.beanCopy(params, this.params, params.getPropertyNames());
-    	String string = this.params.get("url");
-    	String string2 = request.getRequestURL().toString();
+    	params.init(request);
 		logger.info("Start RSS crawl content. locale %1", request.getLocale());
 		return new ResponseEntity<CrawlResponse>(crawlRss.getContent(), new HttpHeaders(), HttpStatus.OK);
     }
