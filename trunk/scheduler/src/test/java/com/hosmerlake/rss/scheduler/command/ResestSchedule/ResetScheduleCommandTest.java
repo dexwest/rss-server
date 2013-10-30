@@ -14,6 +14,10 @@ import javax.annotation.Resource;
 import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.hosmerlake.rss.common.command.Command;
 import com.hosmerlake.rss.common.command.CommandRunner;
@@ -26,8 +30,8 @@ import com.hosmerlake.rss.scheduler.command.LoadSchedule.LoadScheduleCommand;
  * @author BFOX1
  *
  */
-public class ResetScheduleCommandTest extends SchedulerBaseSpringTest<ResetScheduleCommandTest> {
-
+@ContextConfiguration(classes = {ResetScheduleCommandTest.SpringConfig.class})
+public class ResetScheduleCommandTest extends AbstractJUnit4SpringContextTests {
 
 	@Resource(name="reset-schedule-command")
 	private ResetScheduleCommand cmd;
@@ -37,6 +41,10 @@ public class ResetScheduleCommandTest extends SchedulerBaseSpringTest<ResetSched
 	@Before
 	public void setUp() throws Exception {
 	}
+	@Configuration
+	@Import( SchedulerBaseSpringTest.SpringConfig.class )
+	public static class SpringConfig {
+    }
 
 	@Test
 	public void test() {

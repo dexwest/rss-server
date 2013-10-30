@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,15 @@ public class DefaultParameters implements ControllerParameters {
 	private Map<String, String> parameters;
 	private List<String> parameterNames;
 
+
 	public DefaultParameters() {
-	    this.parameters = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
-	    this.parameterNames = new ArrayList<String>();
-	    this.parameterNames.addAll(Arrays.asList(new String[] { "scheme", "hostname", "path", "url", "referrer", "queryString", "userAgent", "method", "requestBody", "port" }));
+		this.parameters = new TreeMap<String, String>(String.CASE_INSENSITIVE_ORDER);
+		this.parameterNames = new ArrayList<String>();
+		this.parameterNames.addAll(Arrays.asList(new String[] { "scheme", "hostname", "path", "url", "referrer", "queryString", "userAgent", "method", "requestBody", "port" }));
+	}
+
+	public DefaultParameters(String jsonParams) {
+
 	}
 
 	/**
@@ -28,44 +34,33 @@ public class DefaultParameters implements ControllerParameters {
 	 * @param request
 	 */
 	public void constructParams(HttpServletRequest request) {
-		Map<String, String[]> parameterMap = request.getParameterMap();
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>(request.getParameterMap());
 		this.putAll(compressMapToOneValuePerKey(parameterMap));
 
-		if (!this.contains("scheme"))
-			parameters.put("scheme", StringUtils.defaultString(request.getScheme(), "http"));
-		if (!this.contains("hostname"))
-			parameters.put("hostname", request.getServerName());
-		if (!this.contains("path"))
-			parameters.put("path", request.getPathTranslated());
-		if (!this.contains("url"))
-			parameters.put("url", request.getRequestURL().toString());
-		if (!this.contains("referer"))
-			parameters.put("referer", request.getHeader("referer"));
-		if (!this.contains("queryString"))
-			parameters.put("queryString", request.getQueryString());
-		if (!this.contains("userAgent"))
-			parameters.put("userAgent", request.getHeader("user-agent"));
-		if (!this.contains("port"))
-			parameters.put("port", String.valueOf(request.getServerPort()));
-		if (!this.contains("method"))
-			parameters.put("method", request.getMethod());
-
-		if (this.get("method").equals("POST")) {
-			// parameters.put("body", readRequestBody(request));
-		}
+		assignParamIfEmpty("scheme", request.getScheme(), "http");
+		assignParamIfEmpty("hostname", request.getServerName(), "http");
+		assignParamIfEmpty("path", request.getPathTranslated(), "http");
+		assignParamIfEmpty("url", request.getRequestURL().toString(), "");
+		assignParamIfEmpty("referer", request.getHeader("referer"), "");
+		assignParamIfEmpty("queryString", request.getQueryString(), "");
+		assignParamIfEmpty("userAgent", request.getHeader("user-agent"), "");
+		assignParamIfEmpty("port", String.valueOf(request.getServerPort()), "80");
+		assignParamIfEmpty("method", request.getMethod(), "");
 	}
+	/***
+	 * Helper method to initialize Default params based on a json string of values
+	 * 
+	 * @param json
+	 */
+	public void constructParams(Map<String, String> input) {
+		for(Entry<String, String> entry : input.entrySet())
+			assignParamIfEmpty(entry.getKey(), entry.getValue(), null);
+	}
+
 
 	@Override
 	public boolean contains(String key) {
 		return parameters.containsKey(key);
-	}
-
-	public Map<String, String> getParameters() {
-		return parameters;
-	}
-
-	public void setParameters(Map<String, String> parameters) {
-		this.parameters = parameters;
 	}
 
 	@Override
@@ -93,6 +88,14 @@ public class DefaultParameters implements ControllerParameters {
 		return parameterNames.toArray(new String[parameterNames.size()]);
 	}
 
+	public Map<String, String> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(Map<String, String> parameters) {
+		this.parameters = parameters;
+	}
+
 	/**
 	 * Static helper used to compress a map containing multiple values into a
 	 * single <String,String> map. First one wins.
@@ -114,6 +117,11 @@ public class DefaultParameters implements ControllerParameters {
 			}
 		}
 		return compressedParams;
+	} 
+
+	private void assignParamIfEmpty(String paramName, String paramValue, String defaultValue) {
+		if (!this.contains(paramName))
+			parameters.put(paramName, StringUtils.defaultString(paramValue, defaultValue));
 	}
 
 }

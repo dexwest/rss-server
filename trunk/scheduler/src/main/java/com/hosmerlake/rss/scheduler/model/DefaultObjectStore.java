@@ -17,8 +17,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.hosmerlake.rss.scheduler.model.DefaultObjectStore.OBJ_TYPE;
-
 /**
  * @author BFOX1
  *

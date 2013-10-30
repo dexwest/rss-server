@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hosmerlake.rss.common.content.ParseException;
+import com.hosmerlake.rss.common.exception.ParseException;
 
 /**
  * @author bfox1

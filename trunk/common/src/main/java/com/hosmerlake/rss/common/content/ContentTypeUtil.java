@@ -12,8 +12,8 @@ import org.apache.http.Header;
  */
 public class ContentTypeUtil {
 
-	private static String[] xmlTypes;
-	private static String[] jsonTypes;
+	public static String[] xmlTypes;
+	public static String[] jsonTypes;
 
 	static {
 		xmlTypes = new String[] {"Application/xml","text/xml"};
@@ -35,7 +35,7 @@ public class ContentTypeUtil {
 		for (Header header : headers) {
 			if (header != null && StringUtils.equalsIgnoreCase("content-type", header.getName()) && contentTypes != null) {
 				for (String type : contentTypes) {
-					if (StringUtils.contains(header.getValue(), type)) {
+					if (StringUtils.equalsIgnoreCase(header.getValue(), type)) {
 						return header.getValue();
 					}
 				}

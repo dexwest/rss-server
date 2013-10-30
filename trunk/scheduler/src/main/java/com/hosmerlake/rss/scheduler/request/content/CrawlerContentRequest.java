@@ -22,7 +22,7 @@ import com.hosmerlake.rss.scheduler.service.CrawlRssService;
  * 
  */
 @Component("crawl-rss-request")
-public class CrawlRSSContentRequest extends DefaultContentRequest<CrawlerRSSContentRoot> {
+public class CrawlerContentRequest extends DefaultContentRequest<CrawlerRSSContentRoot> {
 	
 	@Resource(name="crawl-rss-content-parser")
 	CrawlRssContentParser parser;
@@ -35,7 +35,7 @@ public class CrawlRSSContentRequest extends DefaultContentRequest<CrawlerRSSCont
 	@Override
 	public CrawlerRSSContentRoot processRequest() throws ContentRequestException {
 		validateRequest();
-		super.executeRequest(parser);
+		super.executeRequest();
 		validateResult();
 		return (CrawlerRSSContentRoot) getResult();
 	}

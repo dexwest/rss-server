@@ -6,36 +6,29 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.lang.ClassUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.Header;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.hosmerlake.rss.common.content.ContentTypeUtil;
-import com.hosmerlake.rss.common.content.ParseException;
-import com.hosmerlake.rss.common.content.parser.ContentParser;
+import com.hosmerlake.rss.common.content.parser.StreamParser;
+import com.hosmerlake.rss.common.exception.ParseException;
 
 @Component("default-json-content-parser")
-public class DefaultJsonContentParser implements ContentParser {
+public class DefaultJsonContentParser implements StreamParser {
 	private static final Log logger = LogFactory.getLog(DefaultJsonContentParser.class);
 
 	private String resultClassName = null;
 
 	@Override
-	public Object parse(InputStream data, Header[] headers, String url) throws ParseException {
+	public Object parse(InputStream data, String source) throws ParseException {
 		Reader readerData;
-		String type = ContentTypeUtil.isJson(headers);
-		if (StringUtils.isBlank(type)) {
-			return null;
-		}
 		try {
-			readerData = new InputStreamReader(data, type);
+			readerData = new InputStreamReader(data, ContentTypeUtil.jsonTypes[0]);
 		} catch (UnsupportedEncodingException e) {
 			if (logger.isWarnEnabled()) {
-				logger.warn("Invalid content encoding specified: " + type + ". The system default will be used.");
+				logger.warn("Invalid content encoding specified: " + ContentTypeUtil.jsonTypes[0] + ". The system default will be used.");
 			}
 			readerData = new InputStreamReader(data);
 		}

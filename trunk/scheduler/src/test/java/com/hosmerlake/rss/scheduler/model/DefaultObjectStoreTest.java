@@ -11,12 +11,20 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.hosmerlake.rss.scheduler.SchedulerBaseSpringTest;
 
 
-public class DefaultObjectStoreTest extends SchedulerBaseSpringTest<DefaultObjectStoreTest>  {
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(classes = {DefaultObjectStoreTest.SpringConfig.class})
+public class DefaultObjectStoreTest extends AbstractJUnit4SpringContextTests {
 
 	private static final String INPUT_OBJ_NAME = "DefaultObjectStoreTestLoad";
 	private static final String OUTPUT_OBJ_NAME = "opmlLoadServiceTestCreate.json";
@@ -38,6 +46,12 @@ public class DefaultObjectStoreTest extends SchedulerBaseSpringTest<DefaultObjec
 			fail();
 		}
 	}
+	
+	@Configuration
+	@Import( SchedulerBaseSpringTest.SpringConfig.class )
+	public static class SpringConfig {
+    }
+	
 	@Test
 	public void loadTest() {
 		assertNotNull(objStore);

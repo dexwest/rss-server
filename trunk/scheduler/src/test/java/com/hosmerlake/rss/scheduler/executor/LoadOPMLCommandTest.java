@@ -10,6 +10,10 @@ import org.apache.commons.chain2.impl.ContextBase;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.hosmerlake.rss.scheduler.SchedulerBaseSpringTest;
 import com.hosmerlake.rss.scheduler.command.LoadSchedule.LoadOPMLCommand;
@@ -18,7 +22,8 @@ import com.hosmerlake.rss.scheduler.command.LoadSchedule.LoadOPMLCommand;
  * @author BFOX1
  *
  */
-public class LoadOPMLCommandTest extends SchedulerBaseSpringTest<LoadOPMLCommandTest> {
+@ContextConfiguration(classes = {LoadOPMLCommandTest.SpringConfig.class})
+public class LoadOPMLCommandTest extends AbstractJUnit4SpringContextTests {
 
 	private static final String INPUT_OBJ_NAME = "opmlLoadServiceTestInput";
 	@Autowired
@@ -29,6 +34,10 @@ public class LoadOPMLCommandTest extends SchedulerBaseSpringTest<LoadOPMLCommand
 	@Before
 	public void setUp() throws Exception {
 	}
+	@Configuration
+	@Import( SchedulerBaseSpringTest.SpringConfig.class )
+	public static class SpringConfig {
+    }
 
 	@Test
 	public void test() {

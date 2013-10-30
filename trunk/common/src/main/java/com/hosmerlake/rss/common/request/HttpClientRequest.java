@@ -32,10 +32,9 @@ import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.conn.ProxySelectorRoutePlanner;
 import org.apache.http.protocol.HttpContext;
-import org.springframework.stereotype.Component;
 
 import com.hosmerlake.rss.common.content.DefaultContentRequest;
-import com.hosmerlake.rss.common.content.parser.ContentParser;
+import com.hosmerlake.rss.common.content.parser.ContentTypeParser;
 import com.hosmerlake.rss.common.content.response.HttpClientResponseHandler;
 import com.hosmerlake.rss.common.exception.ContentRequestException;
 
@@ -43,14 +42,18 @@ import com.hosmerlake.rss.common.exception.ContentRequestException;
  * @author BFOX1
  * 
  */
-@Component("http-client-request")
 public class HttpClientRequest {
 	private static final Log logger = LogFactory.getLog(HttpClientRequest.class);
 
+	// Base http Client impl
 	private HttpClient httpClient;
-
+	
+	@Resource(name="http-client-config")
 	private HttpClientConfig config;
 
+	@Resource(name="http-content-type-parser")
+	private ContentTypeParser parser;
+	
 	@PostConstruct
 	public void init() {
 		if (config != null) {
@@ -81,7 +84,7 @@ public class HttpClientRequest {
 	 * @throws ContentRequestException
 	 * @throws IOException
 	 */
-	public Object doRequest(DefaultContentRequest<?> request, ContentParser parser) throws ContentRequestException {
+	public Object doRequest(DefaultContentRequest<?> request) throws ContentRequestException {
 		Object response;
 
 		try {
@@ -101,8 +104,8 @@ public class HttpClientRequest {
 		if (request != null) {
 			String builtUrl = request.getService().getUrl();
 			if (StringUtils.isNotEmpty(builtUrl)) {
-				if (request.getOutgoingParameters() != null) {
-					return new HttpGet(builtUrl + "?" + request.getOutgoingParameters());
+				if (request.getService().getParams() != null) {
+					return new HttpGet(builtUrl + "?" + request.getService().getParams());
 				} else {
 					return new HttpGet(builtUrl);
 				}

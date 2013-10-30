@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hosmerlake.rss.crawler.content.parser.CrawlRss;
+package com.hosmerlake.rss.common.content.parser.rss;
 
 import java.io.InputStream;
 
@@ -12,12 +12,12 @@ import org.apache.commons.feedparser.FeedParserException;
 import org.apache.commons.feedparser.FeedParserFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.Header;
 import org.springframework.stereotype.Component;
 
 import com.hosmerlake.rss.common.content.parser.xml.DefaultXMLContentParser;
+import com.hosmerlake.rss.common.content.parser.xml.FeedDom;
 import com.hosmerlake.rss.common.content.parser.xml.FeedParserListenerImpl;
-import com.hosmerlake.rss.crawler.model.RssContent.RssContentRoot;
+import com.hosmerlake.rss.common.model.RssContent.RssContentRoot;
 
 /**
  * @author bfox1
@@ -41,16 +41,16 @@ public class RssParser extends DefaultXMLContentParser {
 		}
 	}
 	@Override
-	protected Object parserInternal(InputStream is, Header[] headers, String url)
+	protected Object parserInternal(InputStream is, String url)
 	{
-		Object dom = new RssContentRoot();
+		RssContentRoot content = new RssContentRoot(url);
 		try {
 			parser.parse(listener, is,url);
-			dom = listener.getDom();
+			content.setDom((FeedDom) listener.getDom());
 		} catch (FeedParserException fpe) {
 			logger.warn("parse fail see above in logs", fpe);
 		}
-		return dom;
+		return content;
 	}
 	
 	
