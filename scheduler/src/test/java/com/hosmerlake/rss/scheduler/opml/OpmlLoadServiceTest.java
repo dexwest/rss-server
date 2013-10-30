@@ -20,8 +20,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.hosmerlake.rss.common.content.ParseException;
+import com.hosmerlake.rss.common.exception.ParseException;
 import com.hosmerlake.rss.scheduler.SchedulerBaseSpringTest;
 import com.hosmerlake.rss.scheduler.connection.RssConnection;
 import com.hosmerlake.rss.scheduler.model.DefaultObjectStore;
@@ -32,7 +36,8 @@ import com.hosmerlake.rss.scheduler.rss.RssItems;
  * @author BFOX1
  *
  */
-public class OpmlLoadServiceTest extends SchedulerBaseSpringTest<OpmlLoadServiceTest> {
+@ContextConfiguration(classes = {OpmlLoadServiceTest.SpringConfig.class})
+public class OpmlLoadServiceTest extends AbstractJUnit4SpringContextTests {
 
 	private static final String INPUT_OBJ_NAME = "opmlLoadServiceTestInput";
 	private static final String OUTPUT_OBJ_NAME = "opmlLoadServiceTestOutput.json";
@@ -62,6 +67,10 @@ public class OpmlLoadServiceTest extends SchedulerBaseSpringTest<OpmlLoadService
 			fail();
 		}
 	}
+	@Configuration
+	@Import( SchedulerBaseSpringTest.SpringConfig.class )
+	public static class SpringConfig {
+    }
 	
 	@Test
 	public void testCreate() {

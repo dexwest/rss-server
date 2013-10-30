@@ -3,7 +3,6 @@
  */
 package com.hosmerlake.rss.scheduler;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -17,10 +16,9 @@ import com.hosmerlake.rss.common.CommonBaseSpringTest;
  *
  */
 @ContextConfiguration(classes = {SchedulerBaseSpringTest.SpringConfig.class})
-public class SchedulerBaseSpringTest<E> extends CommonBaseSpringTest<E> {
+public class SchedulerBaseSpringTest extends CommonBaseSpringTest {
 
 	@Configuration
-	@ComponentScan( basePackages = {"com.hosmerlake.rss.common","com.hosmerlake.rss.scheduler"} )
 	@Import( CommonBaseSpringTest.SpringConfig.class )
 	@ImportResource( { "classpath*:/application-context.xml" } )
 	@PropertySource({"classpath:/objectStore.properties","classpath:/scheduler.properties"} )

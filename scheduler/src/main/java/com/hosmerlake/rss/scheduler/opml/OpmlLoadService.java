@@ -11,8 +11,8 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.hosmerlake.rss.common.content.ParseException;
 import com.hosmerlake.rss.common.content.parser.json.DefaultJsonContentParser;
+import com.hosmerlake.rss.common.exception.ParseException;
 import com.hosmerlake.rss.scheduler.model.DefaultObjectStore;
 import com.hosmerlake.rss.scheduler.model.LoadObject;
 import com.hosmerlake.rss.scheduler.model.ModelException;
@@ -41,7 +41,7 @@ public class OpmlLoadService implements LoadObject, SaveObject {
 	}
 	@Override
 	public Object loadObj(String objUid) throws ModelException, ParseException {
-		return getParser().parse(objStore.loadObj(objStore.getObjectFileName(objUid, DefaultObjectStore.OBJ_TYPE.JSON)), null, null);
+		return getParser().parse(objStore.loadObj(objStore.getObjectFileName(objUid, DefaultObjectStore.OBJ_TYPE.JSON)), null);
 	}
 	@Override
 	public void saveObj(ByteArrayInputStream obj, String objUid) throws ModelException {

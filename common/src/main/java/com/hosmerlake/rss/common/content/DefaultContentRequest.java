@@ -5,12 +5,17 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.hosmerlake.rss.common.content.parser.ContentParser;
-import com.hosmerlake.rss.common.controller.DefaultParameters;
 import com.hosmerlake.rss.common.exception.ContentRequestException;
 import com.hosmerlake.rss.common.request.HttpClientRequest;
 import com.hosmerlake.rss.common.service.RemoteService;
-
+/***
+ * High level interface to take Http client request, remote service and parser.  Request content from
+ * remote service and parse.  return parsed object from response.
+ * 
+ * @author BFOX1
+ *
+ * @param <E>
+ */
 public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 	  private static final Log logger = LogFactory.getLog(DefaultContentRequest.class);
 	
@@ -18,17 +23,16 @@ public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 	private HttpClientRequest httpClient;
 
 	private RemoteService service;
-	private DefaultParameters outgoingParameters;
 	private Object result;	
 	
 	private boolean canceled = false;
 
 	public abstract E processRequest() throws ContentRequestException;
 	
-	protected void executeRequest(ContentParser parser) throws ContentRequestException {
+	protected void executeRequest() throws ContentRequestException {
 	    try
 	    {
-	      setResult(executeRequestInternal(parser));
+	      setResult(executeRequestInternal());
 	    }
 	    // ContentRequestException is not an extension of RuntimeException so catch it separately
 	    catch(ContentRequestException cre)
@@ -54,12 +58,12 @@ public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 	 * set, and a parsed object will be returned.
 	 * @param parser 
 	 */
-	protected Object executeRequestInternal(ContentParser parser) throws ContentRequestException {
+	protected Object executeRequestInternal() throws ContentRequestException {
 		Object result = null;
 
 		// Don't execute request if it's invalid, canceled, or already executed
 		if (validateInput()) {
-			result = getHttpClient().doRequest(this, parser);
+			result = getHttpClient().doRequest(this);
 			logResponseToConsole(result);
 		}
 		return result;
@@ -97,15 +101,6 @@ public abstract class DefaultContentRequest<E> implements ContentRequest<E> {
 	public void setService(RemoteService service) {
 		this.service = service;
 	}
-
-	public DefaultParameters getOutgoingParameters() {
-		return outgoingParameters;
-	}
-
-	public void setOutgoingParameters(DefaultParameters outgoingParameters) {
-		this.outgoingParameters = outgoingParameters;
-	}
-
 
 	public Object getResult() {
 		return result;

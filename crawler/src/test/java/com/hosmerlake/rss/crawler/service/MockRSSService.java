@@ -3,6 +3,7 @@
  */
 package com.hosmerlake.rss.crawler.service;
 
+import com.hosmerlake.rss.common.controller.DefaultParameters;
 import com.hosmerlake.rss.common.exception.ContentRequestException;
 import com.hosmerlake.rss.common.service.RemoteService;
 
@@ -20,4 +21,8 @@ public class MockRSSService extends RemoteService {
 		return "localhost:8080/mockservice";
 	}
 
+	@Override
+	public DefaultParameters getParams() {
+		return new DefaultParameters("{localhost:8080/mockservice}");
+	}
 }

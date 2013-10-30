@@ -3,7 +3,7 @@
  */
 package com.hosmerlake.rss.scheduler.model;
 
-import com.hosmerlake.rss.common.content.ParseException;
+import com.hosmerlake.rss.common.exception.ParseException;
 
 /**
  * @author BFOX1

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.hosmerlake.rss.common.command.BaseCommand;
 import com.hosmerlake.rss.common.command.Command;
-import com.hosmerlake.rss.common.content.ParseException;
+import com.hosmerlake.rss.common.exception.ParseException;
 import com.hosmerlake.rss.scheduler.model.ModelException;
 import com.hosmerlake.rss.scheduler.opml.Opml;
 import com.hosmerlake.rss.scheduler.opml.OpmlLoadService;

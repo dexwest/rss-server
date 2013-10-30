@@ -3,10 +3,11 @@
  */
 package com.hosmerlake.rss.common.content;
 
+
 /**
  * @author BFOX1
  *
  */
-public interface HttpContent {
-
+public interface Content<E> {
+	E getContent();
 }

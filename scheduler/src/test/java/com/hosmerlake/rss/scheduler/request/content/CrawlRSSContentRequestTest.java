@@ -14,10 +14,10 @@ import com.hosmerlake.rss.scheduler.SchedulerBaseSpringTest;
  * @author BFOX1
  *
  */
-public class CrawlRSSContentRequestTest extends SchedulerBaseSpringTest<CrawlRSSContentRequest> {
+public class CrawlRSSContentRequestTest extends SchedulerBaseSpringTest {
 
 	@Autowired
-	private CrawlRSSContentRequest request;
+	private CrawlerContentRequest request;
 	
 	@Before
 	public void setUp() throws Exception {

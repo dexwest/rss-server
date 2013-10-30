@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hosmerlake.rss.common.content;
+package com.hosmerlake.rss.common.exception;
 
 /**
  * @author BFOX1

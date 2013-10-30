@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLStreamException;
 
-import com.hosmerlake.rss.common.content.ParseException;
+import com.hosmerlake.rss.common.exception.ParseException;
 
 public abstract class DefaultParseRSS {
 	private XMLEventReader reader;

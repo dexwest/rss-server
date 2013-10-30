@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 
+import com.hosmerlake.rss.common.controller.DefaultParameters;
 import com.hosmerlake.rss.common.exception.ContentRequestException;
 import com.hosmerlake.rss.common.service.RemoteService;
 import com.hosmerlake.rss.crawler.controller.content.CrawlRssContentParameters;
@@ -41,6 +42,11 @@ public class CrawlRSSService extends RemoteService {
 			logger.warn("failed to build URL for rss request service", mue);
 			throw new ContentRequestException("request failed for class:  " + this.getClass().getName(), mue);
 		}
+	}
+
+	@Override
+	public DefaultParameters getParams() {
+		return params;
 	}
 
 }

@@ -15,7 +15,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.util.EntityUtils;
 
 import com.hosmerlake.rss.common.content.DefaultContentRequest;
-import com.hosmerlake.rss.common.content.parser.ContentParser;
+import com.hosmerlake.rss.common.content.parser.ContentTypeParser;
 import com.hosmerlake.rss.common.exception.ContentRequestException;
 
 /**
@@ -25,26 +25,22 @@ import com.hosmerlake.rss.common.exception.ContentRequestException;
 public class HttpClientResponseHandler implements ResponseHandler<Object> {
 	private static final Log logger = LogFactory.getLog(HttpClientResponseHandler.class);
 
-	private static final String CACHE_CONTROL_HEADER_NAME = "Cache-Control";
-	private static final String MAX_AGE_PREFIX = "max-age=";
-	private static final String NO_CACHE_DIRECTIVE = "no-cache";
-	private static final String NO_STORE_DIRECTIVE = "no-store";
 	private static final String DEFAULT_RESPONSE_ENCODING = CharEncoding.UTF_8;
 
 	private DefaultContentRequest<?> contentRequest = null;
-	private ContentParser parser = null;
 	
 	private String defaultResponseEncoding = DEFAULT_RESPONSE_ENCODING;
 
+	private ContentTypeParser parser;
+
 	/**
 	 */
-	public HttpClientResponseHandler(DefaultContentRequest<?> request, ContentParser parser) {
+	public HttpClientResponseHandler(DefaultContentRequest<?> request, ContentTypeParser parser) {
 		if (request == null || parser == null) {
 			throw new RuntimeException("Null content request is not allowed in Response Handler constructor");
 		}
-
-		this.contentRequest = request;
 		this.parser = parser;
+		this.contentRequest = request;
 	}
 
 	/**
@@ -63,7 +59,7 @@ public class HttpClientResponseHandler implements ResponseHandler<Object> {
 	      // Check for non-200 response
 	      handleError(response);
 	      
-	      if (this.getParser() != null)
+	      if (parser != null)
 	      {
 	        InputStream responseStream = null;
 	        
@@ -71,9 +67,8 @@ public class HttpClientResponseHandler implements ResponseHandler<Object> {
 	        {
 	          // Parse and close the input stream
 	          responseStream = response.getEntity().getContent();
-	          
-	          // TODO: Should we pass the encoding found in the response header?
-	          returnValue = this.getParser().parse(responseStream, response.getHeaders("content-type"), contentRequest.getService().getUrl());
+	          String url = contentRequest.getService().getUrl();
+	          returnValue = parser.getStreamParser(response.getHeaders("content-type"),url).parse(responseStream, url); 
 	        }
 	        catch(Exception e)
 	        {
@@ -95,9 +90,8 @@ public class HttpClientResponseHandler implements ResponseHandler<Object> {
 	        // This will get and close the stream
 	        returnValue = EntityUtils.toString(response.getEntity(), this.getDefaultResponseEncoding());
 	      }
-	    } catch (ContentRequestException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+	    } catch (ContentRequestException cre) {
+	    	logger.warn("Second catch of error see logs above for originating error", cre);
 		}
 	    finally
 	    {
@@ -158,12 +152,11 @@ public class HttpClientResponseHandler implements ResponseHandler<Object> {
 		this.defaultResponseEncoding = defaultResponseEncoding;
 	}
 
-	public ContentParser getParser() {
+	public ContentTypeParser getParser() {
 		return parser;
 	}
 
-	public void setParser(ContentParser parser) {
+	public void setParser(ContentTypeParser parser) {
 		this.parser = parser;
 	}
-
 }
